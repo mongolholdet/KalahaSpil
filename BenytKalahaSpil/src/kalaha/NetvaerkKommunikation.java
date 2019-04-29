@@ -10,11 +10,10 @@ public class NetvaerkKommunikation
     private int portNummer = 42069;
     private String spillerIPAdresser[];
     
-    public NetvaerkKommunikation(String initspillerIPAdresser[])throws Exception
+    public NetvaerkKommunikation(String initspillerIPAdresser[]) throws Exception
     {
         DatagramSocket kommunikationsSocket = new DatagramSocket(portNummer);
         setspillerIPAdresser(initspillerIPAdresser);
-
     }
     
     public void setspillerIPAdresser(String initspillerIPAdresser[])
@@ -36,7 +35,6 @@ public class NetvaerkKommunikation
     
     public void sendSpilStatus()
     {
-        
+        //for(String spillerIPAdresse :  )
     }
-   
 }
