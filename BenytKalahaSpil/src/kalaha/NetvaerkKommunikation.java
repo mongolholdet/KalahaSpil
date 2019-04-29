@@ -1,4 +1,4 @@
-package benytkalahaspil;
+package kalaha;
 
 public class NetvaerkKommunikation
 {
