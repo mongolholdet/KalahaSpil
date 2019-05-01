@@ -35,7 +35,7 @@ public class NetvaerkKommunikation
         return spillerIPAdresser;
     }
 
-    public void sendSpilStatus(String besked, String IPAdresse) throws Exception // Send data til alle brugere inkluderet i 
+    public void sendSpilStatus(String besked) throws Exception // Send data til alle brugere inkluderet.
     {
         DatagramSocket sendDataSocket = new DatagramSocket(portNummer); // Opretter et DatagramSocket objekt til at sende DatagramPacket objekter
 
@@ -43,7 +43,7 @@ public class NetvaerkKommunikation
         {
             try
             {
-                InetAddress IP = InetAddress.getByAddress(IPAdresse.getBytes()); // Genererer IP addresse objekt
+                InetAddress IP = InetAddress.getByAddress(spillerIPAdresse.getBytes()); // Genererer IP addresse objekt
                 DatagramPacket beskedPacket = new DatagramPacket(besked.getBytes(), besked.length(), IP, portNummer); // Laver en DatagramPacket "packet" med den ønskede besked, dens længde, modtagers IP og portnummer.
                 sendDataSocket.send(beskedPacket); // Sender beskeden med den oprettede DatagramSocket
                 sendDataSocket.close(); // Lukker socketen
