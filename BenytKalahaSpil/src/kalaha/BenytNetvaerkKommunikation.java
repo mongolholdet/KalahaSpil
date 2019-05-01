@@ -16,7 +16,8 @@ public class BenytNetvaerkKommunikation
             Scanner input = new Scanner(System.in);
             System.out.println("Din IP adresse er: " + InetAddress.getLocalHost().getHostAddress().toString());
             System.out.println("Vil du modtager eller sende data? [S/M]");
-            if (input.nextLine() == "S")
+            String kommando = input.nextLine();
+            if (kommando.equals("S") || kommando.equals("s"))
             {
                 System.out.println("indtast IP adresse på din modtager på det samme netvaerk:");
                 String IPAdresser[] = new String[1];
@@ -24,7 +25,7 @@ public class BenytNetvaerkKommunikation
                 NetvaerkKommunikation sendData = new NetvaerkKommunikation(IPAdresser);
                 sendData.sendSpilStatus("luder");
             }
-            else if (input.nextLine() == "M")
+            else if (kommando.equals("M") || kommando.equals("m"))
             {
                 String IPAdresser[] = new String[1];
                 IPAdresser[0] = InetAddress.getLocalHost().getHostAddress().toString();
