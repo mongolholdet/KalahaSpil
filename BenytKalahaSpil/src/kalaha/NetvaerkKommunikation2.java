@@ -58,7 +58,6 @@ public class NetvaerkKommunikation2 extends Thread
                 e.printStackTrace();
             }
         }
-
     }
 
     public void modtagSpilStatus()
@@ -71,7 +70,7 @@ public class NetvaerkKommunikation2 extends Thread
                 Socket server = serverSocket.accept(); // Venter på at der bliver lavet en forbindelse med socketen. Blokerende kode
                 System.out.println("Forbundet med: " + server.getRemoteSocketAddress());
                 DataInputStream modtagDataStream = new DataInputStream(server.getInputStream());
-                byte[] modtagetData = modtagDataStream.readAllBytes();
+                byte[] modtagetData = modtagDataStream.readNBytes(timeout);
                 System.out.println(modtagetData.toString());
             }
             catch (Exception e)
@@ -80,5 +79,4 @@ public class NetvaerkKommunikation2 extends Thread
             }
         }
     }
-
 }
