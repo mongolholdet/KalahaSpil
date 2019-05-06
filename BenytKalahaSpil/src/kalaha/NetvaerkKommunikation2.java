@@ -5,6 +5,7 @@ import java.io.*;
 
 public class NetvaerkKommunikation2 extends Thread
 {
+
     // Forsøg 2 med input og outputstreams
     private ServerSocket serverSocket;
     private int portNummer = 42069;
@@ -13,6 +14,7 @@ public class NetvaerkKommunikation2 extends Thread
 
     public NetvaerkKommunikation2(String initspillerIPAdresser[]) throws IOException
     {
+        spillerIPAdresser = initspillerIPAdresser;
         serverSocket = new ServerSocket(portNummer);
         serverSocket.setSoTimeout(timeout);
     }
@@ -37,38 +39,46 @@ public class NetvaerkKommunikation2 extends Thread
 
     public void sendSpilStatus(String besked) throws Exception // Send data til alle brugere inkluderet.
     {
-        try
+        while (true)
         {
-            for (String modtager : spillerIPAdresser)
+            try
             {
-                System.out.println("Sender data på port: " + serverSocket.getLocalPort() + " og IP adresse: " + modtager);
-                Socket klient = new Socket(modtager, portNummer);
-                System.out.println("Forbundet med: " + klient.getRemoteSocketAddress());
-                DataOutputStream sendDataStream = new DataOutputStream(klient.getOutputStream());
-                sendDataStream.writeBytes(besked);
-                sendDataStream.flush();
+                for (String modtager : spillerIPAdresser)
+                {
+                    System.out.println("Sender data på port: " + serverSocket.getLocalPort() + " og IP adresse: " + modtager);
+                    Socket klient = new Socket(modtager, portNummer);
+                    System.out.println("Forbundet med: " + klient.getRemoteSocketAddress());
+                    DataOutputStream sendDataStream = new DataOutputStream(klient.getOutputStream());
+                    sendDataStream.writeBytes(besked);
+                    sendDataStream.flush();
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
             }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+
     }
 
     public void modtagSpilStatus()
     {
-        try
+        while (true)
         {
-            System.out.println("Venter på at modtage data på port: " + serverSocket.getLocalPort());
-            Socket server = serverSocket.accept(); // Venter på at der bliver lavet en forbindelse med socketen. Blokerende kode
-            System.out.println("Forbundet med: " + server.getRemoteSocketAddress());
-            DataInputStream modtagDataStream = new DataInputStream(server.getInputStream());
-            byte[] modtagetData = modtagDataStream.readAllBytes();
-            System.out.println(modtagetData.toString());
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+            try
+            {
+                System.out.println("Venter på at modtage data på port: " + serverSocket.getLocalPort());
+                Socket server = serverSocket.accept(); // Venter på at der bliver lavet en forbindelse med socketen. Blokerende kode
+                System.out.println("Forbundet med: " + server.getRemoteSocketAddress());
+                DataInputStream modtagDataStream = new DataInputStream(server.getInputStream());
+                byte[] modtagetData = modtagDataStream.readAllBytes();
+                System.out.println(modtagetData.toString());
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
     }
+
 }
