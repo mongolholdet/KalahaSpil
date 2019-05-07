@@ -39,19 +39,22 @@ public class NetvaerkKommunikation2 extends Thread
 
     public void sendSpilStatus(String besked) throws Exception // Send data til alle brugere inkluderet.
     {
+        System.out.println("sendSpilStatus "+besked+"  til "+spillerIPAdresser[0]);
         while (true)
         {
             try
             {
-                for (String modtager : spillerIPAdresser)
-                {
-                    System.out.println("Sender data på port: " + serverSocket.getLocalPort() + " og IP adresse: " + modtager);
-                    Socket klient = new Socket(modtager, portNummer);
+                String modtager = spillerIPAdresser[0];
+                Socket klient = null;
+                //for (String modtager : spillerIPAdresser)
+                //{
+                    System.out.println("Sender data på port: 42069 og IP adresse: " + modtager);
+                    klient = new Socket(modtager, portNummer);
                     System.out.println("Forbundet med: " + klient.getRemoteSocketAddress());
                     DataOutputStream sendDataStream = new DataOutputStream(klient.getOutputStream());
-                    sendDataStream.writeBytes(besked);
-                    sendDataStream.flush();
-                }
+                    sendDataStream.writeUTF(besked);
+                    klient.close();
+                //}
             }
             catch (Exception e)
             {
@@ -70,8 +73,9 @@ public class NetvaerkKommunikation2 extends Thread
                 Socket server = serverSocket.accept(); // Venter på at der bliver lavet en forbindelse med socketen. Blokerende kode
                 System.out.println("Forbundet med: " + server.getRemoteSocketAddress());
                 DataInputStream modtagDataStream = new DataInputStream(server.getInputStream());
-                byte[] modtagetData = modtagDataStream.readNBytes(timeout);
+                byte[] modtagetData = modtagDataStream.readAllBytes();
                 System.out.println(modtagetData.toString());
+                server.close();
             }
             catch (Exception e)
             {
