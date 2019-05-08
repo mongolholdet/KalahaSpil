@@ -17,6 +17,7 @@ public class netvaerkKommunikation
     public netvaerkKommunikation(String[] initIPAdresser, int initportnummer) throws Exception
     {
         int taeller = 0;
+        IPAdresser = new InetAddress[initIPAdresser.length];
         for(String initIPAdresse : initIPAdresser)
         {                
             IPAdresser[taeller] = InetAddress.getByName(initIPAdresse);
@@ -50,6 +51,7 @@ public class netvaerkKommunikation
             {
                 Socket sendDataSocket = new Socket(IPAdresse, portNummer);
                 PrintWriter dataUd = new PrintWriter(sendDataSocket.getOutputStream(), true);
+                dataUd.print(sendtData);
                 System.out.println("Data afsendt: " + sendtData);
                 dataUd.close();
                 sendDataSocket.close();
