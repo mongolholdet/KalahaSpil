@@ -5,13 +5,11 @@
  */
 package kalaha;
 
-import java.io.*;
 import java.net.*;
 import java.util.*;
 
 public class BenytnetvaerkKommunikation
 {
-
     public static void main(String[] args) throws Exception
     {
         while (true)
@@ -25,7 +23,7 @@ public class BenytnetvaerkKommunikation
                 String kommando = input.nextLine();
                 String[] IPAdresse = new String[1];
                 IPAdresse[0] = "192.168.0.20";
-                
+
                 netvaerkKommunikation testForbindelse = new netvaerkKommunikation(IPAdresse, 42069);
                 if (kommando.equals("S") || kommando.equals("s"))
                 {
