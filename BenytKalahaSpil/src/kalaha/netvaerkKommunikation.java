@@ -42,6 +42,10 @@ public class netvaerkKommunikation
         }
     }
 */
+    public String getIPAdresse() throws Exception
+    {
+        return InetAddress.getLocalHost().getHostAddress();
+    }
 
     public void sendData(String sendtData) throws Exception
     {
