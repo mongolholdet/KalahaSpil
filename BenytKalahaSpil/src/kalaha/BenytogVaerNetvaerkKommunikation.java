@@ -9,10 +9,6 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-/**
- *
- * @author Markus
- */
 public class BenytogVaerNetvaerkKommunikation
 {
 
@@ -26,8 +22,7 @@ public class BenytogVaerNetvaerkKommunikation
                 InetAddress IPAdresse = InetAddress.getByName("192.168.0.20");
                 System.out.println("Din IP adresse er: " + InetAddress.getLocalHost().getHostAddress()); //Java2s network 
                 System.out.println("Vil du modtager eller sende data? [S/M]");
-                //while (true)
-                //{
+
                 String kommando = input.nextLine();
 
                 if (kommando.equals("S") || kommando.equals("s"))
@@ -35,21 +30,24 @@ public class BenytogVaerNetvaerkKommunikation
                     Socket SMSocket = new Socket(IPAdresse, 42069);
                     PrintWriter ud = new PrintWriter(SMSocket.getOutputStream(), true);
                     ud.println("i t j u s t w o r k s");
+                    ud.close();
+                    SMSocket.close();
                 }
+
+                else if (kommando.equals("M") || kommando.equals("m"))
+                {
+                    ServerSocket SS = new ServerSocket(42069);
+                    Socket SMSocket = SS.accept();
+                    BufferedReader ind = new BufferedReader(new InputStreamReader(SMSocket.getInputStream()));
+                    System.out.println(ind.readLine());
+                    ind.close();
+                    SMSocket.close();
+                    SS.close();
+                }
+
                 else
                 {
-                    if (kommando.equals("M") || kommando.equals("m"))
-                    {
-                        ServerSocket SS = new ServerSocket(42069);
-                        Socket SMSocket = SS.accept();
-                        BufferedReader ind = new BufferedReader(new InputStreamReader(SMSocket.getInputStream()));
-                        System.out.println(ind.readLine());
-                    }
-
-                    else
-                    {
-                        System.out.println("Forkert input.");
-                    }
+                    System.out.println("Forkert input.");
                 }
 
             }
