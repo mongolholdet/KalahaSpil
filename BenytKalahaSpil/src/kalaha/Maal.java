@@ -1,15 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kalaha;
 
-/**
- *
- * @author Markus
- */
-public class Maal
+public class Maal extends Hul
 {
-    
+    public Maal(int initAntalKugler, int initSpillerNummer)
+    {
+        super(initAntalKugler, initSpillerNummer);
+    }
+
+    private boolean maal;
+
+    public String point()
+    {
+        return "Spiller: " + getSpillerNummer() + " har: " + getAntalKugler() + " point.";
+    }
 }
