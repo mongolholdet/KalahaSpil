@@ -5,6 +5,8 @@
  */
 package kalaha;
 
+import java.awt.*;
+
 /**
  *
  * @author henri
@@ -12,6 +14,14 @@ package kalaha;
 public class SpillepladePanel extends javax.swing.JPanel
 {
 
+    public void paintComponent(Graphics g)
+    {
+	super.paintComponent(g);
+	Graphics2D g2 = (Graphics2D) g;
+	g2.setStroke(new BasicStroke(3));
+	g2.drawLine(0,10,1000,500);
+	g2.drawOval(50,50,50,50);
+    }
     /**
      * Creates new form SpillepladePanel
      */

@@ -12,7 +12,7 @@ public class BenytSpilleplade
         JFrame vindue = new JFrame("Kalaha");
 	vindue.add(new SpillepladePanel());
 	vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	vindue.setSize(420,69);
+	vindue.setSize(500,500);
 	vindue.setVisible(true);
     }
 }
