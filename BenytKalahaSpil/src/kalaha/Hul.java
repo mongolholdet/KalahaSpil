@@ -1,4 +1,3 @@
-
 package kalaha;
 
 public class Hul
@@ -31,4 +30,9 @@ public class Hul
     {
         spillerNummer = setSpillerNummer;
     } 
+    
+    public String toString()
+    {
+        return "Hullet har: " + antalKugler + " kugler og tilhører spiller: " + spillerNummer;
+    }
 }
