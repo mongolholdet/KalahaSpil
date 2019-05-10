@@ -9,7 +9,12 @@ public class Maal extends Hul
 
     private boolean maal;
 
-    public String point()
+    public int point()
+    {
+        return getAntalKugler();
+    }
+    
+    public String toString()
     {
         return "Spiller: " + getSpillerNummer() + " har: " + getAntalKugler() + " point.";
     }
