@@ -9,7 +9,7 @@ package kalaha;
  *
  * @author Markus
  */
-public class Maal
+public class Maal extends Hul
 {
-    
+    private boolean maal;
 }
