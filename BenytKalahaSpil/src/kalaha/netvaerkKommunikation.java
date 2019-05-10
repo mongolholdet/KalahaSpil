@@ -1,3 +1,6 @@
+/*
+    Lavet af: C. Bjørner, U. Esbjørn, M. Repnak, H. Warncke
+ */
 package kalaha;
 
 import java.io.BufferedReader;
