@@ -4,7 +4,7 @@ public class Maal extends Hul
 {
     public Maal(int initAntalKugler, int initSpillerNummer)
     {
-        super(initAntalKugler, initSpillerNummer);
+        super(initAntalKugler, initSpillerNummer); 
     }
 
     private boolean maal;
