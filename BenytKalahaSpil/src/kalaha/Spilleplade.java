@@ -10,21 +10,24 @@ public class Spilleplade
 
     private int antalSpillere;
     private int antalKugler;
+    private int antalKuglerIMaal;
+    private ArrayList<Hul> spillePladeHuller = new ArrayList<Hul>();
 
-    public Spilleplade(int initAntalSpillere, int initAntalKugler)
+    public Spilleplade(int initAntalSpillere, int initAntalKugler, int initAntalKuglerIMaal)
     {
         if (initAntalSpillere == 2)
         {
             antalSpillere = initAntalSpillere;
             antalKugler = initAntalKugler;
+            antalKuglerIMaal = initAntalKuglerIMaal;
             genererHuller();
         }
 
-        if (initAntalSpillere == 4)
+        if (initAntalSpillere == 4)// Skal implementeres i GUI delen først, laver alligevel en spillerplade med 2 spillere
         {
-            // Skal implementeres i GUI delen først.
-            antalSpillere = 2;//initAntalSpillere;
+            antalSpillere = 2; 
             antalKugler = initAntalKugler;
+            antalKuglerIMaal = initAntalKuglerIMaal;
             genererHuller();
         }
     }
@@ -33,37 +36,38 @@ public class Spilleplade
     {
         return antalSpillere;
     }
+    
+    public String toString()
+    {
+        return spillePladeHuller.toString();
+    }
 
     private void genererHuller()
     {
         int antalHuller = (antalSpillere * 6) + antalSpillere;
-        System.out.println(antalHuller);
         //Antallet af huller, med mål inkluderet (6 huller per spiller og et mål per spiller)
-        double spillerNummer = 1;
-        ArrayList<Hul> spillePladeHuller = new ArrayList<Hul>();
+        
+        double spillerNummer;
+        
         for (int i = 0; i < antalHuller; i++)
         {
-
-
-            if (i % 7 == 0)
+            spillerNummer = Math.ceil((double)i / (double)6); 
+            // afrundet et kommatal opad til et heltal som repræsenterer en spiller. Alle kommatal mindre og lig med 1 er lig med 1 og alle kommatal større end 1 men mindre eller lig med 2 er lig med 2, osv.
+            if (spillerNummer == 0)
             {
-                spillePladeHuller.add(new Maal(0, (int)spillerNummer));
-                            System.out.println("Maal oprettet: " + spillerNummer);
-
+                spillerNummer = 1;
+                // "Doven" løsning til ovenstående spillerNummer kode. Da i starter på 0, kommer det første spillerNummer til at være lig med 0/6, som altså er 0, selvom 1 ønskes.
+            }
+            if (i % 7 == 0) 
+            {
+                spillePladeHuller.add(new Maal(antalKuglerIMaal, (int)spillerNummer));
+                // Hvert syvende hul skal være et Maal objekt
             }
             else
             {
                 spillePladeHuller.add(new Hul(antalKugler, (int)spillerNummer));
-            }            spillerNummer = Math.ceil((double)i / (double)7);
-            if (spillerNummer == 0)
-            {
-                spillerNummer = 1;
             }
-            
-            System.out.println("Spillernummer: " + spillerNummer);
-                        System.out.println("i: " + i);
-
         }
-        System.out.println(spillePladeHuller);
+        //System.out.println(spillePladeHuller);
     }
 }
