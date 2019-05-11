@@ -2,9 +2,10 @@ package kalaha;
 
 public class Maal extends Hul
 {
+
     public Maal(int initAntalKugler, int initSpillerNummer)
     {
-        super(initAntalKugler, initSpillerNummer); 
+        super(initAntalKugler, initSpillerNummer);
     }
 
     private boolean maal;
@@ -13,9 +14,14 @@ public class Maal extends Hul
     {
         return getAntalKugler();
     }
-    
+
     public String toString()
     {
         return "Spiller: " + getSpillerNummer() + " har: " + getAntalKugler() + " point";
+    }
+
+    public String toData()
+    {
+        return "{" + getSpillerNummer() + "." + getAntalKugler() + "}";
     }
 }
