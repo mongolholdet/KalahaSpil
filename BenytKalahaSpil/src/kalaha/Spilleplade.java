@@ -33,7 +33,7 @@ public class Spilleplade
 
     public int getAntalSpillere()
     {
-        return antalSpillere;
+        return antalSpillere;  
     }
 
     private void genererHuller()
@@ -75,8 +75,8 @@ public class Spilleplade
         String data = new String();
         for (Hul hul : spillePladeHuller)
         {
-            data += hul.toData();
+            data += hul.toData() + ",";
         }
-        return data;
+        return data.substring(0, data.length() - 1);
     }
 }
