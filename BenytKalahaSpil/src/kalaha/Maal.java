@@ -16,6 +16,6 @@ public class Maal extends Hul
     
     public String toString()
     {
-        return "Spiller: " + getSpillerNummer() + " har: " + getAntalKugler() + " point.";
+        return "Spiller: " + getSpillerNummer() + " har: " + getAntalKugler() + " point";
     }
 }
