@@ -7,5 +7,27 @@ package kalaha;
 
 public class Spiller
 {
-    
+    private String[] IPAdresser;
+    private int portNummer;
+    private int kuglerIHaand;
+    netvaerkKommunikation spillerKommunikation;
+
+    public Spiller(String initIPAdresser[], int initPortNummer) throws Exception
+    {
+        spillerKommunikation = new netvaerkKommunikation(initIPAdresser, initPortNummer);
+        //spillerKommunikation.testForbindelse();
+        IPAdresser = initIPAdresser;
+        portNummer = initPortNummer;
+    }
+
+    public boolean sendSpilStatus(Spilleplade spilStatus) throws Exception
+    {
+        return spillerKommunikation.sendData(spilStatus.toData()); // Ændrer toData til en Spilleplade?
+    }
+
+    public String modtagSpilStatus() throws Exception
+    {
+        String data = spillerKommunikation.modtagData();
+        return null;
+    }
 }
