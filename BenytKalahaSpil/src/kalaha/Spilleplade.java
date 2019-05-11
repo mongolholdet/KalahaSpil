@@ -54,12 +54,12 @@ public class Spilleplade
             }
             if (i % 7 == 0)
             {
-                spillePladeHuller.add(new Maal(antalKuglerIMaal, (int)spillerNummer));
+                spillePladeHuller.add(new Maal(antalKuglerIMaal, i, (int)spillerNummer));
                 // Hvert syvende hul skal være et Maal objekt
             }
             else
             {
-                spillePladeHuller.add(new Hul(antalKugler, (int)spillerNummer));
+                spillePladeHuller.add(new Hul(antalKugler, i, (int)spillerNummer));
             }
         }
         //System.out.println(spillePladeHuller);
