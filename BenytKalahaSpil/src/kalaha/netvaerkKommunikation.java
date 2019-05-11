@@ -45,7 +45,7 @@ public class netvaerkKommunikation
         return InetAddress.getLocalHost().getHostAddress(); // Returnerer den lokale maskines IP Adresse
     }
 
-    public void sendData(String sendtData) throws Exception
+    public boolean sendData(String sendtData) throws Exception
     {
         // Opretter et Socket objekt for at sende data til alle de ønskede IP Adresser 
         try
@@ -58,12 +58,14 @@ public class netvaerkKommunikation
                 System.out.println("Data afsendt: " + sendtData);
                 dataUd.close();
                 sendDataSocket.close();
+                return true;
             }
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+        return false;
     }
 
     public String modtagData() throws Exception
