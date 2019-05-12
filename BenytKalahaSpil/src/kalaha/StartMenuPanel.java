@@ -5,7 +5,9 @@
  */
 package kalaha;
 
+import java.awt.event.ItemEvent;
 import java.net.InetAddress;
+import javax.swing.JOptionPane;
 
 public class StartMenuPanel extends javax.swing.JPanel
 {
@@ -65,24 +67,17 @@ public class StartMenuPanel extends javax.swing.JPanel
         jRadioButton1.setSelected(true);
         jRadioButton1.setText("2 spillere");
         jRadioButton1.setToolTipText("");
-        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter()
+        jRadioButton1.addItemListener(new java.awt.event.ItemListener()
         {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
             {
-                jRadioButton1MouseClicked(evt);
+                jRadioButton1ItemStateChanged(evt);
             }
         });
 
         buttonGroup2.add(jRadioButton2);
         jRadioButton2.setText("4 spillere");
         jRadioButton2.setToolTipText("");
-        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                jRadioButton2MouseClicked(evt);
-            }
-        });
 
         jTextField1.setToolTipText("");
         jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -94,6 +89,13 @@ public class StartMenuPanel extends javax.swing.JPanel
 
         jButton1.setText("Start");
         jButton1.setToolTipText("");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Din IP adresse er: ");
@@ -150,24 +152,31 @@ public class StartMenuPanel extends javax.swing.JPanel
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jRadioButton2MouseClicked
-    {//GEN-HEADEREND:event_jRadioButton2MouseClicked
-        jLabel4.setVisible(true);
-        jLabel4.setText("Indtast de andre spilleres IP adresser:");
-        jTextField2.setVisible(true);
-        jTextField3.setVisible(true);
-        revalidate();
-        repaint();
-    }//GEN-LAST:event_jRadioButton2MouseClicked
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButton1MouseClicked
+    {//GEN-HEADEREND:event_jButton1MouseClicked
+        if (jRadioButton2.isSelected())
+        {
+            JOptionPane.showMessageDialog(null, "4 spillere er ikke implementeret endnu ¯\\_(ツ)_/¯");
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jRadioButton1MouseClicked
-    {//GEN-HEADEREND:event_jRadioButton1MouseClicked
-        jLabel4.setText("Indtast den anden spillers IP addresse:");
-        jTextField2.setVisible(false);
-        jTextField3.setVisible(false);
+    private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_jRadioButton1ItemStateChanged
+    {//GEN-HEADEREND:event_jRadioButton1ItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED)
+        {
+            jLabel4.setText("Indtast den anden spillers IP addresse:");
+            jTextField2.setVisible(false);
+            jTextField3.setVisible(false);
+        }
+        else if (evt.getStateChange() == ItemEvent.DESELECTED)
+        {
+            jLabel4.setText("Indtast de andre spilleres IP adresser:");
+            jTextField2.setVisible(true);
+            jTextField3.setVisible(true);
+        }
         revalidate();
         repaint();
-    }//GEN-LAST:event_jRadioButton1MouseClicked
+    }//GEN-LAST:event_jRadioButton1ItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
