@@ -19,6 +19,16 @@ public class Spiller
         IPAdresser = initIPAdresser;
         portNummer = initPortNummer;
     }
+    
+    public int getKuglerIHaand()
+    {
+        return kuglerIHaand;
+    }
+    
+    public void setKuglerIHaand(int kugler)
+    {
+        kuglerIHaand = kugler;
+    }
 
     public boolean sendSpilStatus(Spilleplade spilStatus) throws Exception
     {
