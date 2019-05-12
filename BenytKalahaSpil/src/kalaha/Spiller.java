@@ -21,7 +21,7 @@ public class Spiller
         IPAdresser = initIPAdresser;
         portNummer = initPortNummer;
     }
-    
+
     public int getSpillerNummer()
     {
         return spillerNummer;
@@ -30,6 +30,11 @@ public class Spiller
     public int getKuglerIHaand()
     {
         return kuglerIHaand;
+    }
+
+    public String getIPAdresse() throws Exception
+    {
+        return spillerKommunikation.getLokalIPAdresse();
     }
 
     public void setKuglerIHaand(int kugler)
