@@ -7,6 +7,7 @@ public class Kalaha
     private Spiller[] kalahaSpillere;
     private Spilleplade kalahaSpilleplade;
     private String[] IPAdresser;
+    private boolean startTur = true;
 
     public Kalaha(int initAntalSpillere, int initAntalKugler, int initAntalKuglerIMaal, String initIPAdresser[], int initPortNummer) throws Exception
     {
@@ -30,36 +31,48 @@ public class Kalaha
             System.out.println(IPadresse);
         }
     }
-    
-        public void printSpillerInfor() // Ser ud til at sortere IP adresser rigtigt? 
+
+    public void printSpillerInfo() // Ser ud til at sortere IP adresser rigtigt? 
     {
         for (Spiller spiller : kalahaSpillere)
         {
-            System.out.println(spiller.get);
+            System.out.println(spiller.getSpillerNummer());
         }
     }
 
-    public void tur(Spiller turSpiller, Hul valgtHul)
+    public boolean tur(Spiller turSpiller, Hul valgtHul)
     {
-        if (!valgtHul.toData().contains("{"))
+        if (valgtHul.toData().contains("[") && valgtHul.getAntalKugler() != 0) // Hvis spiller vælger et normalt hul som ikke er tomt
         {
-            turSpiller.setKuglerIHaand(valgtHul.getAntalKugler());
-            valgtHul.setAntalKugler(0);
-        }
-
-        {
-            if (turSpiller.getKuglerIHaand() == 0)
+            if (startTur && valgtHul.getSpillerNummer() == turSpiller.getSpillerNummer())
             {
-                if (valgtHul.toData().contains("{") && valgtHul.getSpillerNummer() == turSpiller.getSpillerNummer())
-                {
-                    // En ny tur 
-                }
-                else
-                {
-                    // Næste Spiller
-                }
+                turSpiller.setKuglerIHaand(valgtHul.getAntalKugler());
+                valgtHul.setAntalKugler(0);
+                startTur = false; // Spiller bliver "løsladt" til resten af banen
+                return true;
+            }
+
+            else
+            {
+                turSpiller.setKuglerIHaand(valgtHul.getAntalKugler());
+                valgtHul.setAntalKugler(0);
+                startTur = false; // Spiller bliver "løsladt" til resten af banen
+                return true;
             }
         }
-    }
 
+        if (turSpiller.getKuglerIHaand() == 0) // Spiller afslutter i eget mål
+        {
+            if (startTur == false && valgtHul.toData().contains("{") && valgtHul.getSpillerNummer() == turSpiller.getSpillerNummer())
+            {
+                startTur = true; // Spiller skal starte i sin egne del af banen
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }
