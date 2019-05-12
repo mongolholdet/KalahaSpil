@@ -79,4 +79,9 @@ public class Spilleplade
         }
         return data.substring(0, data.length() - 1);
     }
+    
+        public String toHulData(Hul valgtHul)
+    {
+        return valgtHul.toData();
+    }
 }

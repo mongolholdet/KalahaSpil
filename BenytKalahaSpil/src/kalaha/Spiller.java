@@ -9,15 +9,32 @@ public class Spiller
 {
     private String[] IPAdresser;
     private int portNummer;
+    private int spillerNummer;
     private int kuglerIHaand;
     netvaerkKommunikation spillerKommunikation;
 
-    public Spiller(String initIPAdresser[], int initPortNummer) throws Exception
+    public Spiller(int initSpillerNummer, String initIPAdresser[], int initPortNummer) throws Exception
     {
         spillerKommunikation = new netvaerkKommunikation(initIPAdresser, initPortNummer);
         //spillerKommunikation.testForbindelse();
+        spillerNummer = initSpillerNummer;
         IPAdresser = initIPAdresser;
         portNummer = initPortNummer;
+    }
+    
+    public int getSpillerNummer()
+    {
+        return spillerNummer;
+    }
+
+    public int getKuglerIHaand()
+    {
+        return kuglerIHaand;
+    }
+
+    public void setKuglerIHaand(int kugler)
+    {
+        kuglerIHaand = kugler;
     }
 
     public boolean sendSpilStatus(Spilleplade spilStatus) throws Exception
