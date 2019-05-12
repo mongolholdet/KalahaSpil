@@ -33,7 +33,7 @@ public class Spilleplade
 
     public int getAntalSpillere()
     {
-        return antalSpillere;  
+        return antalSpillere;
     }
 
     private void genererHuller()
@@ -43,26 +43,24 @@ public class Spilleplade
 
         double spillerNummer;
 
-        for (int i = 0; i < antalHuller; i++)
+        for (int i = 1; i < antalHuller + 1; i++)
         {
-            spillerNummer = Math.ceil((double)i / (double)6);
-            // afrundet et kommatal opad til et heltal som repræsenterer en spiller. Alle kommatal mindre og lig med 1 er lig med 1 og alle kommatal større end 1 men mindre eller lig med 2 er lig med 2, osv.
+            spillerNummer = Math.ceil((double)i / 7.0);
             if (spillerNummer == 0)
             {
                 spillerNummer = 1;
                 // "Doven" løsning til ovenstående spillerNummer kode. Da i starter på 0, kommer det første spillerNummer til at være lig med 0/6, som altså er 0, selvom 1 ønskes.
             }
-            if (i % 7 == 0)
+            if (i % 7 != 0)
+            {
+                spillePladeHuller.add(new Hul(antalKugler, i, (int)spillerNummer));
+            }
+            else if (i % 7 == 0)
             {
                 spillePladeHuller.add(new Maal(antalKuglerIMaal, i, (int)spillerNummer));
                 // Hvert syvende hul skal være et Maal objekt
             }
-            else
-            {
-                spillePladeHuller.add(new Hul(antalKugler, i, (int)spillerNummer));
-            }
         }
-        //System.out.println(spillePladeHuller);
     }
 
     public String toString()
@@ -79,8 +77,8 @@ public class Spilleplade
         }
         return data.substring(0, data.length() - 1);
     }
-    
-        public String toHulData(Hul valgtHul)
+
+    public String toHulData(Hul valgtHul)
     {
         return valgtHul.toData();
     }
