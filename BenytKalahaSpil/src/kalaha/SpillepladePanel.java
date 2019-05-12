@@ -104,9 +104,9 @@ public class SpillepladePanel extends javax.swing.JPanel
 
     private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
     {//GEN-HEADEREND:event_formMouseClicked
-        int x = evt.getX() - 25;
-        int y = evt.getY() - 100;
-        System.out.println(x + "," + y);
+        int x = Math.round((evt.getX() - 25)/(1500/8));
+        int y = Math.round((evt.getY() - 100)/(380/2));
+        System.out.println("test: " + x + "," + y);
     }//GEN-LAST:event_formMouseClicked
 
 
