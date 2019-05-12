@@ -18,9 +18,39 @@ public class SpillepladePanel extends javax.swing.JPanel
     {
 	super.paintComponent(g);
 	Graphics2D g2 = (Graphics2D) g;
-	g2.setStroke(new BasicStroke(3));
-	g2.drawLine(0,10,1000,500);
-	g2.drawOval(50,50,50,50);
+        
+        // Tegn bræt
+        g2.setColor(new Color(193, 154, 107));
+        g2.fill3DRect(25,100,1500,380,true);
+        
+        for (int i = 0; i < 6; i++)
+        {
+            // Tegn almindelige huller
+            g2.setColor(new Color(134, 101, 56));
+            g2.fillOval(225+i*185,110,175,175);         // Øverste række
+            g2.fillOval(225+i*185,295,175,175);         // Nederste række
+            
+            // Tegn kugle og antal
+            g2.setColor(new Color(36, 28, 19));
+            g2.fillOval(225+i*185+54,110+77,25,25);     // Øverste række
+            g2.drawString("X n",225+i*185+84,110+94);
+            g2.fillOval(225+i*185+54,295+77,25,25);     // Nederste række
+            g2.drawString("X n",225+i*185+84,295+94);
+        }
+        for (int i = 0; i <= 37; i++)
+        {
+            // Tegn mål huller
+            g2.setColor(new Color(134, 101, 56));
+            g2.fillOval(40,110+5*i,175,175);            // Venstre mål
+            g2.fillOval(1335,110+5*i,175,175);          // Højre mål
+        }
+        
+        g2.setColor(new Color(36, 28, 19));
+        g2.fillOval(40+54,275,25,25);
+        g2.drawString("X n",40+84,292);
+        g2.fillOval(1335+54,275,25,25);
+        g2.drawString("X n",1335+84,292);
+
     }
     /**
      * Creates new form SpillepladePanel
@@ -40,19 +70,47 @@ public class SpillepladePanel extends javax.swing.JPanel
     private void initComponents()
     {
 
+        jLabel1 = new javax.swing.JLabel();
+
+        addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                formMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Spil Information...eller noget");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addContainerGap(222, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
+    {//GEN-HEADEREND:event_formMouseClicked
+        int x = evt.getX() - 25;
+        int y = evt.getY() - 100;
+        System.out.println(x + "," + y);
+    }//GEN-LAST:event_formMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
