@@ -92,7 +92,7 @@ public class Kalaha
                 turSpiller.sendHulStatus(valgtHul);
                 return true;
             }
-            else
+            else if (valgtHul.getAntalKugler() == 0)
             {
                 return false;
             }
