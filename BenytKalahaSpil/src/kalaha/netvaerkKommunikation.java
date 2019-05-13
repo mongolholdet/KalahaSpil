@@ -3,7 +3,6 @@
  */
 package kalaha;
 
-import com.dosse.upnp.UPnP;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -22,14 +21,12 @@ public class netvaerkKommunikation
     {
         setIPAdresser(initIPAdresser);
         portNummer = initportnummer;
-        UPnP.openPortTCP(portNummer);
     }
 
     public netvaerkKommunikation(int initportnummer) throws Exception 
     {
         // husk at sætte IP adressen senere hen.
         portNummer = initportnummer;
-        UPnP.openPortTCP(portNummer);
     }
 
     public void setIPAdresser(String[] initIPAdresser) throws Exception
