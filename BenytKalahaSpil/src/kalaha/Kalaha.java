@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class Kalaha
 {
+
     private Spiller[] kalahaSpillere;
     private Spilleplade kalahaSpilleplade;
     private String[] IPAdresser;
@@ -44,20 +45,22 @@ public class Kalaha
     {
         String hulDataString = kalahaSpilleplade.toData();
         String[] hulDataStringArray = hulDataString.split(",");
-
         int i = 0;
-        while (true)
+        int spiller = 0;
+        while (true) // Skal lede efter spillernummeret i alle huller og derfra finde Målene
         {
-            if (hulDataStringArray[i].contains(String.valueOf(spillerNummer)) && hulDataStringArray[i].contains("{"))
+            if (hulDataStringArray[i].contains("{") && hulDataStringArray[i].contains(String.valueOf(spillerNummer))) // Er et Mål og indeholder det angivne tal.
             {
-                break;
+                String spillerString = hulDataStringArray[i].split("\\.")[0]; // Første felt i et Maal Hul, splittet efter ".", altså f.eks.{1 eller {10 
+                spiller = Integer.parseInt(spillerString.substring(1, spillerString.length())); // Sletter første element i det tidligere trin, altså {1 eller {10 bliver til 1 eller 10 
+                if (spiller == spillerNummer)
+                {
+                    break;
+                }
             }
-            else
-            {
-                i++;
-            }
+            i++;
         }
-        String pointString = hulDataStringArray[i].split("\\.")[2];
+        String pointString = hulDataStringArray[i].split("\\.")[2]; // Det rigtige felt er fundet, pointene skal nu findes, det er i tredje element
         int point = Integer.parseInt(pointString.substring(0, pointString.length() - 1));
         return point;
     }
@@ -77,8 +80,8 @@ public class Kalaha
 
             else if (turSpiller.getKuglerIHaand() > 0)
             {
-                valgtHul.setAntalKugler(valgtHul.getAntalKugler()+1);
-                turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand()-1);
+                valgtHul.setAntalKugler(valgtHul.getAntalKugler() + 1);
+                turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand() - 1);
                 startTur = false; // Spiller bliver "løsladt" til resten af banen
                 return true;
             }
