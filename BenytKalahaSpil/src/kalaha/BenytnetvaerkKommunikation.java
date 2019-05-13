@@ -20,7 +20,7 @@ public class BenytnetvaerkKommunikation
             {
                 Scanner input = new Scanner(System.in);
                 System.out.println("Din IP adresse er: " + testForbindelse.getLokalIPAdresse());
-                System.out.println("Vil du modtager eller sende data? [S/M]");
+                System.out.println("Vil du modtager eller sende data eller echo'e? [S/M/E]");
                 String kommando = input.nextLine();
 
                 if (kommando.equals("S") || kommando.equals("s"))
@@ -32,7 +32,12 @@ public class BenytnetvaerkKommunikation
                 {
                     testForbindelse.modtagData();
                 }
-
+                
+                else if (kommando.equals("E") || kommando.equals("e"))
+                {
+                    testForbindelse.testForbindelse();
+                }
+                
                 else
                 {
                     System.out.println("Forkert input.");
