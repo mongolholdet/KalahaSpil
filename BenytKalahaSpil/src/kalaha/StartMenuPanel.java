@@ -7,6 +7,7 @@ package kalaha;
 
 import java.awt.event.ItemEvent;
 import java.net.InetAddress;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class StartMenuPanel extends javax.swing.JPanel
@@ -18,9 +19,20 @@ public class StartMenuPanel extends javax.swing.JPanel
         initComponents();
     }
     
-    public String getLokalIPAdresse() throws Exception
+    public String getLokalIPAdresse()
     {
-        return InetAddress.getLocalHost().getHostAddress(); // Returnerer den lokale maskines IP Adresse
+        String IP = new String();
+	
+	try
+	{
+	    IP = InetAddress.getLocalHost().getHostAddress(); // Returnerer den lokale maskines IP Adresse
+	}
+	catch (Exception e)
+	{
+	    e.printStackTrace();
+	}
+	
+	return IP;
     }
     
     /**
@@ -47,14 +59,7 @@ public class StartMenuPanel extends javax.swing.JPanel
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        try
-        {
-            jTextField4.setText(getLokalIPAdresse());
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        jTextField4.setText(getLokalIPAdresse());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -100,6 +105,8 @@ public class StartMenuPanel extends javax.swing.JPanel
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Din IP adresse er: ");
 
+        jTextField4.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,8 +134,9 @@ public class StartMenuPanel extends javax.swing.JPanel
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -154,15 +162,43 @@ public class StartMenuPanel extends javax.swing.JPanel
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButton1MouseClicked
     {//GEN-HEADEREND:event_jButton1MouseClicked
-        if (jRadioButton2.isSelected())
+        // Oprettelse af spilleplade vindue ud fra antal spillere valgt
+	if (jRadioButton2.isSelected())
         {
-            JOptionPane.showMessageDialog(null, "4 spillere er ikke implementeret endnu ¯\\_(ツ)_/¯");
+            /*String[] IP = new String[4];
+	    IP[0] = jTextField4.getText();
+	    IP[1] = jTextField1.getText();
+	    IP[2] = jTextField2.getText();
+	    IP[3] = jTextField3.getText();
+	    
+	    JFrame vindue = new JFrame("Kalaha");
+	    vindue.add(new SpillepladePanel(IP));
+	    vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    vindue.setSize(1564,542);
+	    vindue.setResizable(false);
+	    vindue.setVisible(true);*/
+	    
+	    JOptionPane.showMessageDialog(null, "4 spillere er ikke implementeret endnu ¯\\_(ツ)_/¯");
         }
+	else
+	{
+	    String[] IP = new String[2];
+	    IP[0] = jTextField4.getText();
+	    IP[1] = jTextField1.getText();
+	    
+	    JFrame vindue = new JFrame("Kalaha");
+	    vindue.add(new SpillepladePanel(IP));
+	    vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    vindue.setSize(1564,542);
+	    vindue.setResizable(false);
+	    vindue.setVisible(true);
+	}
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_jRadioButton1ItemStateChanged
     {//GEN-HEADEREND:event_jRadioButton1ItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED)
+        // Vis 1 eller 3 tekstfelter ud fra valg af antal spillere
+	if (evt.getStateChange() == ItemEvent.SELECTED)
         {
             jLabel4.setText("Indtast den anden spillers IP addresse:");
             jTextField2.setVisible(false);

@@ -6,14 +6,32 @@
 package kalaha;
 
 import java.awt.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author henri
  */
 public class SpillepladePanel extends javax.swing.JPanel
-{
-
+{    
+    /**
+     * Creates new form SpillepladePanel
+     */
+    public SpillepladePanel(String[] IP)
+    {
+	initComponents();
+	
+	try
+	{
+	    Kalaha spil = new Kalaha(2, 6, 0, IP, 41970);
+	}
+	catch (Exception e)
+	{
+	    JOptionPane.showMessageDialog(null,"Én eller flere af de indtastede IP addresser er ikke gyldig.");
+	    e.printStackTrace();
+	}
+    }
+    
     public void paintComponent(Graphics g)
     {
 	super.paintComponent(g);
@@ -37,6 +55,7 @@ public class SpillepladePanel extends javax.swing.JPanel
             g2.fillOval(225+i*185+54,295+77,25,25);     // Nederste række
             g2.drawString("X n",225+i*185+84,295+94);
         }
+	
         for (int i = 0; i <= 37; i++)
         {
             // Tegn mål huller
@@ -44,20 +63,14 @@ public class SpillepladePanel extends javax.swing.JPanel
             g2.fillOval(40,110+5*i,175,175);            // Venstre mål
             g2.fillOval(1335,110+5*i,175,175);          // Højre mål
         }
-        
+	
+        // Tegn kugle og antal i målene
         g2.setColor(new Color(36, 28, 19));
         g2.fillOval(40+54,275,25,25);
         g2.drawString("X n",40+84,292);
         g2.fillOval(1335+54,275,25,25);
         g2.drawString("X n",1335+84,292);
 
-    }
-    /**
-     * Creates new form SpillepladePanel
-     */
-    public SpillepladePanel()
-    {
-	initComponents();
     }
 
     /**
@@ -104,12 +117,20 @@ public class SpillepladePanel extends javax.swing.JPanel
 
     private void formMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseClicked
     {//GEN-HEADEREND:event_formMouseClicked
-        int x = Math.round((evt.getX() - 25)/(1500/8));
+        // Udregning af simple koordinaterne som et 8x2 gitter
+	int x = Math.round((evt.getX() - 25)/(1500/8));
         int y = Math.round((evt.getY() - 100)/(380/2));
-        System.out.println("test: " + x + "," + y);
+        
+	if (y == 1)
+	{
+	    if (x > 0 && x < 7)
+	    {
+		System.out.println("Du har trykket på dit eget hul (hehe) nr: " + x);
+	    }
+	}
     }//GEN-LAST:event_formMouseClicked
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
