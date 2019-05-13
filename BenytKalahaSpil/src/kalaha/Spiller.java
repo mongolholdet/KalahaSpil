@@ -47,9 +47,14 @@ public class Spiller
         return spillerKommunikation.sendData(spilStatus.toData()); // Ændrer toData til en Spilleplade?
     }
 
+    public boolean sendHulStatus(Hul opdateretHul) throws Exception
+    {
+        return spillerKommunikation.sendData(opdateretHul.toData()); // Ændrer toData til en Spilleplade?
+    }
+
     public String modtagSpilStatus() throws Exception
     {
         String data = spillerKommunikation.modtagData();
-        return null;
+        return data;
     }
 }
