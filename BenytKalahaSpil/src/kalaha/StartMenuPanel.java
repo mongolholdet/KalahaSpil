@@ -162,7 +162,8 @@ public class StartMenuPanel extends javax.swing.JPanel
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButton1MouseClicked
     {//GEN-HEADEREND:event_jButton1MouseClicked
-        if (jRadioButton2.isSelected())
+        // Oprettelse af spilleplade vindue ud fra antal spillere valgt
+	if (jRadioButton2.isSelected())
         {
             /*String[] IP = new String[4];
 	    IP[0] = jTextField4.getText();
@@ -196,7 +197,8 @@ public class StartMenuPanel extends javax.swing.JPanel
 
     private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_jRadioButton1ItemStateChanged
     {//GEN-HEADEREND:event_jRadioButton1ItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED)
+        // Vis 1 eller 3 tekstfelter ud fra valg af antal spillere
+	if (evt.getStateChange() == ItemEvent.SELECTED)
         {
             jLabel4.setText("Indtast den anden spillers IP addresse:");
             jTextField2.setVisible(false);
