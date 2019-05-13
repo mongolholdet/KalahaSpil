@@ -99,10 +99,13 @@ public class netvaerkKommunikation
             for (InetAddress IPAdresse : IPAdresser)
             {
                 sendData("Virker du? Sendt fra: " + getLokalIPAdresse());
+                System.out.println("Virker du? Sendt fra: " + getLokalIPAdresse());
                 String modtagetData = modtagData();
+                System.out.println(modtagetData);
                 if (modtagetData.contains("Virker du? Sendt fra: "))
                 {
                     sendData("Ja jeg virker. Sendt fra: " + getLokalIPAdresse());
+                    System.out.println("Ja jeg virker. Sendt fra: " + getLokalIPAdresse());
                 }
             }
         }

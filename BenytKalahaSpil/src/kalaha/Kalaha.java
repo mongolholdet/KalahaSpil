@@ -44,16 +44,25 @@ public class Kalaha
     {
         String hulDataString = kalahaSpilleplade.toData();
         String[] hulDataStringArray = hulDataString.split(",");
+
         int i = 0;
-        while (!hulDataStringArray[i].contains("{") && !hulDataStringArray[i].contains(String.valueOf(spillerNummer)))
+        while (true)
         {
-            i++;
+            if (hulDataStringArray[i].contains(String.valueOf(spillerNummer)) && hulDataStringArray[i].contains("{"))
+            {
+                break;
+            }
+            else
+            {
+                i++;
+            }
         }
-        String[] hulDataStringArrayArray = hulDataStringArray[i].split(".");
-        return Integer.parseInt(hulDataStringArrayArray[2].substring(0, 1));
+        String pointString = hulDataStringArray[i].split("\\.")[2];
+        int point = Integer.parseInt(pointString.substring(0, pointString.length() - 1));
+        return point;
     }
 
-    public boolean tur(Spiller turSpiller, Hul valgtHul)
+    public boolean tur(Spiller turSpiller, Hul valgtHul) throws Exception
     {
         if (valgtHul.toData().contains("[") && valgtHul.getAntalKugler() != 0) // Hvis spiller vælger et normalt hul som ikke er tomt
         {
@@ -62,13 +71,14 @@ public class Kalaha
                 turSpiller.setKuglerIHaand(valgtHul.getAntalKugler());
                 valgtHul.setAntalKugler(0);
                 startTur = false; // Spiller bliver "løsladt" til resten af banen
+                turSpiller.sendHulStatus(valgtHul);
                 return true;
             }
 
-            else
+            else if (turSpiller.getKuglerIHaand() > 0)
             {
-                turSpiller.setKuglerIHaand(valgtHul.getAntalKugler());
-                valgtHul.setAntalKugler(0);
+                valgtHul.setAntalKugler(valgtHul.getAntalKugler()+1);
+                turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand()-1);
                 startTur = false; // Spiller bliver "løsladt" til resten af banen
                 return true;
             }
@@ -79,6 +89,7 @@ public class Kalaha
             if (startTur == false && valgtHul.toData().contains("{") && valgtHul.getSpillerNummer() == turSpiller.getSpillerNummer())
             {
                 startTur = true; // Spiller skal starte i sin egne del af banen
+                turSpiller.sendHulStatus(valgtHul);
                 return true;
             }
             else
