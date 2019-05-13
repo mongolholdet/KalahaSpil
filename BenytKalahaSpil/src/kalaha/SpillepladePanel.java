@@ -6,14 +6,32 @@
 package kalaha;
 
 import java.awt.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author henri
  */
 public class SpillepladePanel extends javax.swing.JPanel
-{
-
+{    
+    /**
+     * Creates new form SpillepladePanel
+     */
+    public SpillepladePanel(String[] IP)
+    {
+	initComponents();
+	
+	try
+	{
+	    Kalaha spil = new Kalaha(2, 6, 0, IP, 41970);
+	}
+	catch (Exception e)
+	{
+	    JOptionPane.showMessageDialog(null,"Én eller flere af de indtastede IP addresser er ikke gyldig.");
+	    e.printStackTrace();
+	}
+    }
+    
     public void paintComponent(Graphics g)
     {
 	super.paintComponent(g);
@@ -51,13 +69,6 @@ public class SpillepladePanel extends javax.swing.JPanel
         g2.fillOval(1335+54,275,25,25);
         g2.drawString("X n",1335+84,292);
 
-    }
-    /**
-     * Creates new form SpillepladePanel
-     */
-    public SpillepladePanel()
-    {
-	initComponents();
     }
 
     /**
@@ -109,7 +120,7 @@ public class SpillepladePanel extends javax.swing.JPanel
         System.out.println("test: " + x + "," + y);
     }//GEN-LAST:event_formMouseClicked
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
