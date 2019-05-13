@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
  */
 public class SpillepladePanel extends javax.swing.JPanel
 {    
+    private Kalaha kalaha;
+    
     /**
      * Creates new form SpillepladePanel
      */
@@ -23,7 +25,7 @@ public class SpillepladePanel extends javax.swing.JPanel
 	
 	try
 	{
-	    Kalaha spil = new Kalaha(2, 6, 0, IP, 41970);
+	    kalaha = new Kalaha(2, 6, 0, IP, 41970);
 	}
 	catch (Exception e)
 	{
