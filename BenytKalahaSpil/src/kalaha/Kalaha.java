@@ -32,12 +32,25 @@ public class Kalaha
         }
     }
 
-    public void printSpillerInfo() // Ser ud til at sortere IP adresser rigtigt? 
+    public void printSpillerInfo() throws Exception// Ser ud til at sortere IP adresser rigtigt? 
     {
         for (Spiller spiller : kalahaSpillere)
         {
-            System.out.println(spiller.getSpillerNummer());
+            System.out.println(spiller.getSpillerNummer() + spiller.getIPAdresse() + getSpillerPoint(spiller.getSpillerNummer()));
         }
+    }
+
+    public int getSpillerPoint(int spillerNummer)
+    {
+        String hulDataString = kalahaSpilleplade.toData();
+        String[] hulDataStringArray = hulDataString.split(",");
+        int i = 0;
+        while (!hulDataStringArray[i].contains("{") && !hulDataStringArray[i].contains(String.valueOf(spillerNummer)))
+        {
+            i++;
+        }
+        String[] hulDataStringArrayArray = hulDataStringArray[i].split(".");
+        return Integer.parseInt(hulDataStringArrayArray[2].substring(0, 1));
     }
 
     public boolean tur(Spiller turSpiller, Hul valgtHul)
