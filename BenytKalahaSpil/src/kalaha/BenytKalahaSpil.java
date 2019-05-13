@@ -13,9 +13,6 @@ public class BenytKalahaSpil
         testString[2]= "192.167.20.90";
         testString[3]= "10.16.23.56";
         Kalaha test = new Kalaha(2, 6, 0, testString, 41970);
-        for(String TS :test.printIPAdresser())
-        {
-            System.out.println(TS);
-        }
+
     }
 }
