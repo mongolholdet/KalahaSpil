@@ -75,10 +75,10 @@ public class Kalaha
                 return true;
             }
 
-            else
+            else if (turSpiller.getKuglerIHaand() > 0)
             {
-                turSpiller.setKuglerIHaand(valgtHul.getAntalKugler());
-                valgtHul.setAntalKugler(0);
+                valgtHul.setAntalKugler(valgtHul.getAntalKugler()+1);
+                turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand()-1);
                 startTur = false; // Spiller bliver "løsladt" til resten af banen
                 return true;
             }
@@ -90,7 +90,6 @@ public class Kalaha
             {
                 startTur = true; // Spiller skal starte i sin egne del af banen
                 turSpiller.sendHulStatus(valgtHul);
-
                 return true;
             }
             else
