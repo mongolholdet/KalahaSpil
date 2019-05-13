@@ -67,6 +67,21 @@ public class Kalaha
 
     public boolean tur(Spiller turSpiller, Hul valgtHul) throws Exception
     {
+        
+        /*
+        Brugsscenarier:
+        Spiller starter, skal starte i sin del af banen.
+        Spiller skal tømme starthullet.
+        Spiller har startet spillet, skal lægge en kugle i et hul med et nummer et større end sidste hul.
+        Spiller har stadigvæk kugler, men sidste hul er nået, næste hul er første hul.
+        Spiller skal ikke sætte point i fjendens mål.
+        Spiller skal sætte point i sit eget mål.
+        Spiller skal tømme hul hvor sidste kugle lander og fortsætte.
+        Spiller tømmer hånd i et tomt hul, afslut tur.
+        Spiller tømmer hånd i mål, start en ny tur
+        
+        */
+        
         if (valgtHul.toData().contains("[") && valgtHul.getAntalKugler() != 0) // Hvis spiller vælger et normalt hul som ikke er tomt
         {
             if (startTur && valgtHul.getSpillerNummer() == turSpiller.getSpillerNummer())
