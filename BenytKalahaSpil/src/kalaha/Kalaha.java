@@ -64,7 +64,18 @@ public class Kalaha
         int point = Integer.parseInt(pointString.substring(0, pointString.length() - 1));
         return point;
     }
-
+    
+    public int getAntalKuglerIHul(int hulNummer)
+    {
+	String hulDataString = kalahaSpilleplade.toData();
+	
+	String[] hulDataStringArray = hulDataString.split(",");
+	String hulDataStringTrimmed = hulDataStringArray[hulNummer].substring(1,hulDataStringArray[hulNummer].length()-1);
+	String[] hulDataStringSplitted = hulDataStringTrimmed.split("\\.");
+	
+	return Integer.parseInt(hulDataStringSplitted[2]);
+    }
+    
     public boolean tur(Spiller turSpiller, Hul valgtHul) throws Exception
     {
         
