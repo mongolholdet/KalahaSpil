@@ -107,15 +107,15 @@ public class KalahaSpilleplade
     
     public void tur(Spiller turSpiller, Hul valgtHul) throws Exception
     {
-        if (valgtHul.getAntalKugler() != 0 && startTur)
+        if (valgtHul.getAntalKugler() != 0 && startTur && valgtHul.toData().contains("["))
         {
             turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand() + valgtHul.getAntalKugler()); // Saml kuglerne op
-            valgtHul.setAntalKugler(0); // Tøm hullet
+            valgtHul.setAntalKugler(0); // Tøm hullet, virker ikke af mystiske årsager
             startTur = false;
-            
+
             while (turSpiller.getKuglerIHaand() >= 1)    // Så længe spiller har kugler
             {
-                // Sæt hul til det næste
+                // Sæt hul til det næste, VIRKER
                 if (valgtHul.getHulNummer() < spillePladeHuller.size())
                 {
                     // Hvis sidste hul
@@ -142,6 +142,10 @@ public class KalahaSpilleplade
                     // ved ikke tomt hul
                     else if(valgtHul.getAntalKugler() != 0)
                     {
+                        // tag kugler fra næste hul
+                        turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand() + valgtHul.getAntalKugler()); // Saml kuglerne op
+                        valgtHul.setAntalKugler(0); // Tøm hullet
+                        sidsteHul = valgtHul.getHulNummer() - 1;
                         startTur = true;
                         break;
                     }
