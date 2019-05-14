@@ -171,7 +171,7 @@ public class StartMenuPanel extends javax.swing.JPanel
 	    IP[2] = jTextField2.getText();
 	    IP[3] = jTextField3.getText();
 	    
-	    JFrame vindue = new JFrame("Kalaha");
+	    JFrame vindue = new JFrame("Kalaha - " + IP[0] + ", " + IP[1] + ", " + IP[2] + ", " + IP[3]);
 	    vindue.add(new SpillepladePanel(IP));
 	    vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    vindue.setSize(1564,542);
@@ -186,7 +186,7 @@ public class StartMenuPanel extends javax.swing.JPanel
 	    IP[0] = jTextField4.getText();
 	    IP[1] = jTextField1.getText();
 	    
-	    JFrame vindue = new JFrame("Kalaha");
+	    JFrame vindue = new JFrame("Kalaha - " + IP[0] + ", " + IP[1]);
 	    vindue.add(new SpillepladePanel(IP));
 	    vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    vindue.setSize(1564,542);
