@@ -8,6 +8,7 @@ public class Kalaha
     private Spiller[] kalahaSpillere;
     private Spilleplade kalahaSpilleplade;
     private String[] IPAdresser;
+    private int portNummer;
     private boolean startTur = true;
     private int sidsteHul = 0;
 
@@ -15,13 +16,18 @@ public class Kalaha
     {
         Arrays.sort(initIPAdresser);
         IPAdresser = initIPAdresser;
+        portNummer = initPortNummer;
 
         kalahaSpilleplade = new Spilleplade(initAntalSpillere, initAntalKugler, initAntalKuglerIMaal);
+        System.out.println(kalahaSpilleplade.toData());
 
         kalahaSpillere = new Spiller[initAntalSpillere + 1]; // Spiller bruger ikke spiller numre: 0..n, men 1..n
+        //kalahaSpillere[0] = new Spiller(0, IPAdresser, portNummer);
+
         for (int i = 1; i < initAntalSpillere + 1; i++)
         {
-            kalahaSpillere[i] = new Spiller(i, initIPAdresser, initPortNummer);
+            kalahaSpillere[i] = new Spiller(i, IPAdresser, portNummer);
+            System.out.println(kalahaSpillere[i]);
             i++;
         }
     }
@@ -34,6 +40,7 @@ public class Kalaha
         }
     }
 
+    /*
     public void printSpillerInfo() throws Exception// Ser ud til at sortere IP adresser rigtigt? 
     {
         for (Spiller spiller : kalahaSpillere)
@@ -41,14 +48,14 @@ public class Kalaha
             System.out.println(spiller.getSpillerNummer() + spiller.getIPAdresse() + getSpillerPoint(spiller.getSpillerNummer()));
         }
     }
-
+     */
     public Spiller getSpiller(int spillerNummer)
     {
+
         if (spillerNummer > 0)
         {
             return kalahaSpillere[spillerNummer];
-        }
-        else
+        } else
         {
             return kalahaSpillere[0]; // Tom spiller
         }
@@ -75,16 +82,18 @@ public class Kalaha
         }
         return hulDataStringArray[i];
     }
-    
-    
 
     public int getSpillerPoint(int spillerNummer)
     {
         String hulDataString = kalahaSpilleplade.toData();
         String[] hulDataStringArray = hulDataString.split(",");
+        for (String lort : hulDataStringArray)
+        {
+            System.out.println(lort);
+        }
         int i = 0;
         int spiller = 0;
-        while (true) // Skal lede efter spillernummeret i alle huller og derfra finde Målene
+        while (i < hulDataStringArray.length) // Skal lede efter spillernummeret i alle huller og derfra finde Målene
         {
             if (hulDataStringArray[i].contains("{") && hulDataStringArray[i].contains(String.valueOf(spillerNummer))) // Er et Mål og indeholder det angivne tal.
             {
@@ -93,9 +102,15 @@ public class Kalaha
                 if (spiller == spillerNummer)
                 {
                     break;
+                } else
+                {
+                    i++;
                 }
+            } else
+            {
+                i++;
             }
-            i++;
+            System.out.println(i);
         }
         String pointString = hulDataStringArray[i].split("\\.")[2]; // Det rigtige felt er fundet, pointene skal nu findes, det er i tredje element
         int point = Integer.parseInt(pointString.substring(0, pointString.length() - 1));
@@ -112,14 +127,11 @@ public class Kalaha
 
         return Integer.parseInt(hulDataStringSplitted[2]);
     }
-    
+
     public String toData()
     {
         return kalahaSpilleplade.toData();
     }
-
-    public boolean tur(Spiller turSpiller, Hul valgtHul) throws Exception
-    {
 
         /*
         Brugsscenarier:
@@ -133,6 +145,8 @@ public class Kalaha
         Spiller tømmer hånd i et tomt hul, afslut tur.
         Spiller tømmer hånd i mål, start en ny tur
          */
+    public void tur(Spiller turSpiller, Hul valgtHul) throws Exception
+    {
         if (valgtHul.toData().contains("[")) // Hvis der bliver valgt et normalt hul
         {
             if (startTur) // Hvis det er startturen
@@ -148,40 +162,111 @@ public class Kalaha
             if (valgtHul.getHulNummer() == kalahaSpilleplade.getAntalHuller())
             {
                 sidsteHul = 0;
-            }
-            else if (valgtHul.getHulNummer() == sidsteHul + 1) // Hvis næste valgte hul er det næste hul på pladen.
+            } else
             {
-                if (turSpiller.getKuglerIHaand() == 1) // hvis 
+                if (valgtHul.getHulNummer() == sidsteHul + 1) // Hvis næste valgte hul er det næste hul på pladen.
                 {
-                    if (valgtHul.getAntalKugler() == 0)
+                    if (turSpiller.getKuglerIHaand() == 1) // hvis 
                     {
-                        return false;
-                    }
-                    else
-                    {
+
                         turSpiller.setKuglerIHaand(valgtHul.getAntalKugler() + turSpiller.getKuglerIHaand()); // Saml kuglerne op plus den man havde i hånden
                         valgtHul.setAntalKugler(0); // Tøm hullet
                         sidsteHul = valgtHul.getHulNummer(); // Gem at dette er det sidste brugte hul
-                        return true;
+
+                    } else
+                    {
+                        turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand() - 1); // Fjern en kugle fra hånden
+                        valgtHul.setAntalKugler(valgtHul.getAntalKugler() + 1); // Læg en kugle i hullet
+                        sidsteHul = valgtHul.getHulNummer(); // Gem at dette er det sidste brugte hul
+                    }
+                } else
+                {
+                    if (valgtHul.getHulNummer() == sidsteHul + 2) // Hvis det valgte hul springer to huller over
+                    {
+                        if ((sidsteHul + 1) % 7 == 0) // Er det sidste hul et mål?
+                        {
+                            turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand() - 1); // Fjern en kugle fra hånden
+                            valgtHul.setAntalKugler(valgtHul.getAntalKugler() + 1); // Læg en kugle i hullet
+                            sidsteHul = valgtHul.getHulNummer(); // Gem at dette er det sidste brugte hul
+                        }
                     }
                 }
-                else
-                {
-                    turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand() - 1); // Fjern en kugle fra hånden
-                    valgtHul.setAntalKugler(valgtHul.getAntalKugler() + 1); // Læg en kugle i hullet
-                    sidsteHul = valgtHul.getHulNummer(); // Gem at dette er det sidste brugte hul
-                    return true;
+            }
+        }
+        if (valgtHul.toData().contains("{")) // Hvis der bliver valgt et maal
+        {
 
+            if (valgtHul.getSpillerNummer() == turSpiller.getSpillerNummer()) // Hvis der bliver valgt eget hul
+            {
+                turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand() - 1); // Fjern en kugle fra hånden
+                valgtHul.setAntalKugler(valgtHul.getAntalKugler() + 1); // Læg en kugle i hullet
+                sidsteHul = valgtHul.getHulNummer();
+
+                if (turSpiller.getKuglerIHaand() == 0) // Hvis der bliver afsluttet i mål, start forfra
+                {
+                    startTur = true;
                 }
             }
-            else if (valgtHul.getHulNummer() == sidsteHul + 2) // Hvis det valgte hul springer to huller over
+        }
+
+//        sidsteHul = kalahaSpilleplade.getAntalHuller() + 2; // Kan ikke bruges da 
+        
+    }
+}
+
+/*
+if (valgtHul.toData().contains("[")) // Hvis der bliver valgt et normalt hul
+        {
+            if (startTur) // Hvis det er startturen
             {
-                if ((sidsteHul + 1) % 7 == 0) // Er det sidste hul et mål?
+                startTur = false;
+                if (turSpiller.getSpillerNummer() == valgtHul.getSpillerNummer()) // Hvis hullet er på den rigtige side  
                 {
-                    turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand() - 1); // Fjern en kugle fra hånden
-                    valgtHul.setAntalKugler(valgtHul.getAntalKugler() + 1); // Læg en kugle i hullet
+                    turSpiller.setKuglerIHaand(valgtHul.getAntalKugler()); // Saml kuglerne op
+                    valgtHul.setAntalKugler(0); // Tøm hullet
                     sidsteHul = valgtHul.getHulNummer(); // Gem at dette er det sidste brugte hul
-                    return true;
+                }
+            }
+            if (valgtHul.getHulNummer() == kalahaSpilleplade.getAntalHuller())
+            {
+                sidsteHul = 0;
+            } 
+            else
+            {
+                if (valgtHul.getHulNummer() == sidsteHul + 1) // Hvis næste valgte hul er det næste hul på pladen.
+                {
+                    if (turSpiller.getKuglerIHaand() == 1) // hvis 
+                    {
+                        if (valgtHul.getAntalKugler() == 0)
+                        {
+                            return false;
+                        } else
+                        {
+                            turSpiller.setKuglerIHaand(valgtHul.getAntalKugler() + turSpiller.getKuglerIHaand()); // Saml kuglerne op plus den man havde i hånden
+                            valgtHul.setAntalKugler(0); // Tøm hullet
+                            sidsteHul = valgtHul.getHulNummer(); // Gem at dette er det sidste brugte hul
+                            return true;
+                        }
+                    } else
+                    {
+                        turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand() - 1); // Fjern en kugle fra hånden
+                        valgtHul.setAntalKugler(valgtHul.getAntalKugler() + 1); // Læg en kugle i hullet
+                        sidsteHul = valgtHul.getHulNummer(); // Gem at dette er det sidste brugte hul
+                        return true;
+
+                    }
+                } else
+                {
+                    if (valgtHul.getHulNummer() == sidsteHul + 2) // Hvis det valgte hul springer to huller over
+                    {
+                        if ((sidsteHul + 1) % 7 == 0) // Er det sidste hul et mål?
+                        {
+                            turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand() - 1); // Fjern en kugle fra hånden
+                            valgtHul.setAntalKugler(valgtHul.getAntalKugler() + 1); // Læg en kugle i hullet
+                            sidsteHul = valgtHul.getHulNummer(); // Gem at dette er det sidste brugte hul
+                            return true;
+                        }
+                    }
                 }
             }
         }
@@ -202,12 +287,12 @@ public class Kalaha
             }
         }
 
-        sidsteHul = kalahaSpilleplade.getAntalHuller() + 2; // Kan ikke bruges da 
+//        sidsteHul = kalahaSpilleplade.getAntalHuller() + 2; // Kan ikke bruges da 
         return false;
     }
-}
+ */
 
-/*
+ /*
         if (valgtHul.toData().contains("[") && valgtHul.getAntalKugler() != 0) // Hvis spiller vælger et normalt hul som ikke er tomt
         {
             if (startTur && valgtHul.getSpillerNummer() == turSpiller.getSpillerNummer())
