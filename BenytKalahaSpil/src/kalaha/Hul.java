@@ -17,9 +17,9 @@ public class Hul
     public Hul(String hulData)
     {
         String[] hulDataArray = hulData.split("\\.");
-        spillerNummer = Integer.parseInt(hulDataArray[1].substring(1, hulDataArray[1].length()));
+        spillerNummer = Integer.parseInt(hulDataArray[0].substring(1, hulDataArray[0].length()));
         hulNummer = Integer.parseInt(hulDataArray[1]);
-        antalKugler = Integer.parseInt(hulDataArray[1].substring(0, hulDataArray[1].length() - 1));
+        antalKugler = Integer.parseInt(hulDataArray[2].substring(0, hulDataArray[2].length() - 1));
     }
 
     public int getAntalKugler()
