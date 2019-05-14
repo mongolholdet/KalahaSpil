@@ -151,7 +151,8 @@ public class Kalaha
         {
             if (startTur) // Hvis det er startturen
             {
-                startTur = false;
+                startTur = false;   //ikke starttur
+                
                 if (turSpiller.getSpillerNummer() == valgtHul.getSpillerNummer()) // Hvis hullet er på den rigtige side  
                 {
                     turSpiller.setKuglerIHaand(valgtHul.getAntalKugler()); // Saml kuglerne op
@@ -159,7 +160,7 @@ public class Kalaha
                     sidsteHul = valgtHul.getHulNummer(); // Gem at dette er det sidste brugte hul
                 }
             }
-            if (valgtHul.getHulNummer() == kalahaSpilleplade.getAntalHuller())
+            if (valgtHul.getHulNummer() == kalahaSpilleplade.getAntalHuller())  //
             {
                 sidsteHul = 0;
             } else

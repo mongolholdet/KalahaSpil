@@ -20,8 +20,9 @@ public class BenytKalahaSpil
         {
             inputString = input.nextLine();
             test.tur(test.getSpiller(1), new Hul(inputString));
-            System.out.println( test.getSpiller(1).getKuglerIHaand());
             System.out.println(test.toData());
+            System.out.println( test.getSpiller(1).getKuglerIHaand());
+
         }
     }
 }
