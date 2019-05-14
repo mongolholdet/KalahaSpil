@@ -96,7 +96,7 @@ public class KalahaSpilleplade
         int i = 0;
         while (true)
         {
-            if (hulNummer == spillePladeHuller.get(i).getSpillerNummer())
+            if (hulNummer == spillePladeHuller.get(i).getHulNummer())
             {
                 break;
             }
@@ -111,9 +111,12 @@ public class KalahaSpilleplade
         {
             turSpiller.setKuglerIHaand(valgtHul.getAntalKugler()); // Saml kuglerne op
             valgtHul.setAntalKugler(0); // Tøm hullet
-            while (turSpiller.getKuglerIHaand() > 1)
+            startTur = false;
+            
+            while (turSpiller.getKuglerIHaand() >= 1)    // Så længe spiller har kugler
             {
-                if (valgtHul.getHulNummer() < 14)
+                // Sæt hul til det næste
+                if (valgtHul.getHulNummer() < spillePladeHuller.size())
                 {
                     valgtHul = getHul(valgtHul.getHulNummer() + 1);
                     
@@ -122,6 +125,17 @@ public class KalahaSpilleplade
                 {
                     valgtHul = getHul(0);
                 }
+                
+                // Sidste kugle
+                if(turSpiller.getKuglerIHaand() == 1)
+                {
+                    // ved mål
+                    if(valgtHul.toData().contains("{") && turSpiller.getSpillerNummer() == valgtHul.getSpillerNummer())
+                    {
+                        startTur = true;
+                    }
+                }
+                // Læg kugle i hul
                 turSpiller.setKuglerIHaand(turSpiller.getKuglerIHaand() - 1);
                 valgtHul.setAntalKugler(valgtHul.getAntalKugler() + 1);
             }
