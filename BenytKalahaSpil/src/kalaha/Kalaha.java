@@ -115,7 +115,6 @@ public class Kalaha
                 {
                     if (valgtHul.getAntalKugler() == 0)
                     {
-
                         return false;
                     }
                     else
@@ -146,7 +145,6 @@ public class Kalaha
                 }
             }
         }
-
         if (valgtHul.toData().contains("{")) // Hvis der bliver valgt et maal
         {
 
@@ -163,6 +161,15 @@ public class Kalaha
                 }
             }
         }
+
+        sidsteHul = kalahaSpilleplade.getAntalHuller() + 2; // Kan ikke bruges da 
+        return false;
+    }
+}
+
+
+
+
 
         /*
         if (valgtHul.toData().contains("[") && valgtHul.getAntalKugler() != 0) // Hvis spiller vælger et normalt hul som ikke er tomt
@@ -200,7 +207,3 @@ public class Kalaha
         }
         return true;
          */
-        sidsteHul = kalahaSpilleplade.getAntalHuller() + 2; // Kan ikke bruges da 
-        return false;
-    }
-}
