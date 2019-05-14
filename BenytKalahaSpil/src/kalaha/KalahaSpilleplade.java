@@ -38,7 +38,6 @@ public class KalahaSpilleplade
             {
                 kalahaSpillere[i] = new Spiller(i, IPAdresser, portNummer);
                 System.out.println(kalahaSpillere[i]);
-                i++;
             }
             genererHuller();
         }

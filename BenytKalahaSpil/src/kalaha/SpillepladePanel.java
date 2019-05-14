@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 public class SpillepladePanel extends javax.swing.JPanel
 {    
     private Kalaha kalaha;
+    private KalahaSpilleplade kalahaspilleplade;
     
     /**
      * Creates new form SpillepladePanel
@@ -18,7 +19,7 @@ public class SpillepladePanel extends javax.swing.JPanel
     {
 	try
 	{
-	    kalaha = new Kalaha(2, 6, 0, IP, 41970);
+	    kalahaspilleplade = new KalahaSpilleplade(2, 6, 0, IP, 41970);
 	}
 	catch (Exception e)
 	{
@@ -40,7 +41,8 @@ public class SpillepladePanel extends javax.swing.JPanel
         
 	g2.setFont(new Font("Arial", Font.PLAIN, 20));
 	
-	int j = 12;
+	int j = 13;
+	int k = 1;
 	for (int i = 0; i < 6; i++)
 	{
 	    g2.setColor(new Color(134, 101, 56));
@@ -50,10 +52,11 @@ public class SpillepladePanel extends javax.swing.JPanel
 	    // Tegn kugler og antal i hullerne
 	    g2.setColor(new Color(36, 28, 19));
 	    g2.fillOval(225+i*185+54,295+77,25,25);	// Nederste række
-            g2.drawString("X " + kalaha.getAntalKuglerIHul(i),225+i*185+84,295+97);
+	    g2.drawString("X " + kalahaspilleplade.getHul(k).getAntalKugler(),225+i*185+84,295+97);
 	    g2.fillOval(225+i*185+54,110+77,25,25);	// Øverste række
-	    g2.drawString("X " + kalaha.getAntalKuglerIHul(j),225+i*185+84,110+97);
+	    g2.drawString("X " + kalahaspilleplade.getHul(j).getAntalKugler(),225+i*185+84,110+97);
 	    j--;
+	    k++;
 	}
 	
         for (int i = 0; i <= 37; i++)
@@ -66,10 +69,10 @@ public class SpillepladePanel extends javax.swing.JPanel
 	
         // Tegn kugler og antal i målene
         g2.setColor(new Color(36, 28, 19));
-        g2.fillOval(40+54,275,25,25);
-        g2.drawString("X " + kalaha.getAntalKuglerIHul(13),40+84,295);			// Venstre mål
-        g2.fillOval(1335+54,275,25,25);			// Højre mål
-        g2.drawString("X " + kalaha.getAntalKuglerIHul(6),1335+84,295);
+        g2.fillOval(40+54,275,25,25);								// Venstre mål
+        g2.drawString("X " + kalahaspilleplade.getHul(14).getAntalKugler(),40+84,295);
+	g2.fillOval(1335+54,275,25,25);								// Højre mål
+	g2.drawString("X " + kalahaspilleplade.getHul(7).getAntalKugler(),1335+84,295);
 
     }
 
@@ -95,10 +98,10 @@ public class SpillepladePanel extends javax.swing.JPanel
         });
 
         jLabel2.setText("Spiller 1:");
-        jLabel2.setText("Spiller 1: " + kalaha.getSpillerPoint(1) + " point");
+        jLabel2.setText("Spiller 1: " + kalahaspilleplade.getHul(7).getAntalKugler() + " point");
 
         jLabel3.setText("Spiller 2:");
-        jLabel3.setText("Spiller 2: " + kalaha.getSpillerPoint(2) + " point");
+        jLabel3.setText("Spiller 2: " + kalahaspilleplade.getHul(14).getAntalKugler() + " point");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -128,6 +131,8 @@ public class SpillepladePanel extends javax.swing.JPanel
 	int x = Math.round((evt.getX() - 25)/(1500/8));
         int y = Math.round((evt.getY() - 100)/(380/2));
         
+	System.out.println(x + "," + y);
+	
 	if (y == 1)
 	{
 	    if (x > 0 && x < 7)
