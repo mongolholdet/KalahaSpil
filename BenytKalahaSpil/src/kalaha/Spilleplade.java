@@ -24,7 +24,7 @@ public class Spilleplade
 
         if (initAntalSpillere == 4)// Skal implementeres i GUI delen først, laver alligevel en spillerplade med 2 spillere
         {
-            antalSpillere = 4;
+            antalSpillere = initAntalSpillere;
             antalKugler = initAntalKugler;
             antalKuglerIMaal = initAntalKuglerIMaal;
             genererHuller();
@@ -34,6 +34,11 @@ public class Spilleplade
     public int getAntalSpillere()
     {
         return antalSpillere;
+    }
+    
+    public int getAntalHuller()
+    {
+        return spillePladeHuller.size();
     }
 
     private void genererHuller()
@@ -63,6 +68,7 @@ public class Spilleplade
         }
     }
 
+    //@Override
     public String toString()
     {
         return spillePladeHuller.toString();
