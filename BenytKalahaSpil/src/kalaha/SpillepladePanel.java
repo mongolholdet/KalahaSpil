@@ -43,20 +43,21 @@ public class SpillepladePanel extends javax.swing.JPanel
         g2.setColor(new Color(193, 154, 107));
         g2.fill3DRect(25,100,1500,380,true);
         
-        for (int i = 0; i < 6; i++)
-        {
-            // Tegn almindelige huller
-            g2.setColor(new Color(134, 101, 56));
-            g2.fillOval(225+i*185,110,175,175);         // Øverste række
-            g2.fillOval(225+i*185,295,175,175);         // Nederste række
-            
-            // Tegn kugle og antal
-            g2.setColor(new Color(36, 28, 19));
-            g2.fillOval(225+i*185+54,110+77,25,25);     // Øverste række
-            g2.drawString("X n",225+i*185+84,110+94);
-            g2.fillOval(225+i*185+54,295+77,25,25);     // Nederste række
-            g2.drawString("X n",225+i*185+84,295+94);
-        }
+	int j = 12;
+	for (int i = 0; i < 6; i++)
+	{
+	    g2.setColor(new Color(134, 101, 56));
+	    g2.fillOval(225+i*185,295,175,175);		// Nederste række
+	    g2.fillOval(225+i*185,110,175,175);		// Øverste række
+	    
+	    // Tegn kugler og antal i hullerne
+	    g2.setColor(new Color(36, 28, 19));
+	    g2.fillOval(225+i*185+54,295+77,25,25);	// Nederste række
+            g2.drawString("X " + kalaha.getAntalKuglerIHul(i),225+i*185+84,295+94);
+	    g2.fillOval(225+i*185+54,110+77,25,25);	// Øverste række
+	    g2.drawString("X " + kalaha.getAntalKuglerIHul(j),225+i*185+84,110+94);
+	    j--;
+	}
 	
         for (int i = 0; i <= 37; i++)
         {
@@ -66,12 +67,12 @@ public class SpillepladePanel extends javax.swing.JPanel
             g2.fillOval(1335,110+5*i,175,175);          // Højre mål
         }
 	
-        // Tegn kugle og antal i målene
+        // Tegn kugler og antal i målene
         g2.setColor(new Color(36, 28, 19));
         g2.fillOval(40+54,275,25,25);
-        g2.drawString("X n",40+84,292);
-        g2.fillOval(1335+54,275,25,25);
-        g2.drawString("X n",1335+84,292);
+        g2.drawString("X " + kalaha.getAntalKuglerIHul(13),40+84,292);			// Venstre mål
+        g2.fillOval(1335+54,275,25,25);			// Højre mål
+        g2.drawString("X " + kalaha.getAntalKuglerIHul(6),1335+84,292);
 
     }
 
