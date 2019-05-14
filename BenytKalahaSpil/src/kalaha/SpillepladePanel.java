@@ -43,6 +43,8 @@ public class SpillepladePanel extends javax.swing.JPanel
         g2.setColor(new Color(193, 154, 107));
         g2.fill3DRect(25,100,1500,380,true);
         
+	g2.setFont(new Font("Arial", Font.PLAIN, 20));
+	
 	int j = 12;
 	for (int i = 0; i < 6; i++)
 	{
@@ -53,9 +55,9 @@ public class SpillepladePanel extends javax.swing.JPanel
 	    // Tegn kugler og antal i hullerne
 	    g2.setColor(new Color(36, 28, 19));
 	    g2.fillOval(225+i*185+54,295+77,25,25);	// Nederste række
-            g2.drawString("X " + kalaha.getAntalKuglerIHul(i),225+i*185+84,295+94);
+            g2.drawString("X " + kalaha.getAntalKuglerIHul(i),225+i*185+84,295+97);
 	    g2.fillOval(225+i*185+54,110+77,25,25);	// Øverste række
-	    g2.drawString("X " + kalaha.getAntalKuglerIHul(j),225+i*185+84,110+94);
+	    g2.drawString("X " + kalaha.getAntalKuglerIHul(j),225+i*185+84,110+97);
 	    j--;
 	}
 	
@@ -70,9 +72,9 @@ public class SpillepladePanel extends javax.swing.JPanel
         // Tegn kugler og antal i målene
         g2.setColor(new Color(36, 28, 19));
         g2.fillOval(40+54,275,25,25);
-        g2.drawString("X " + kalaha.getAntalKuglerIHul(13),40+84,292);			// Venstre mål
+        g2.drawString("X " + kalaha.getAntalKuglerIHul(13),40+84,295);			// Venstre mål
         g2.fillOval(1335+54,275,25,25);			// Højre mål
-        g2.drawString("X " + kalaha.getAntalKuglerIHul(6),1335+84,292);
+        g2.drawString("X " + kalaha.getAntalKuglerIHul(6),1335+84,295);
 
     }
 
