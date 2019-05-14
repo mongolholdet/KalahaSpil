@@ -16,8 +16,6 @@ public class SpillepladePanel extends javax.swing.JPanel
      */
     public SpillepladePanel(String[] IP)
     {
-	initComponents();
-	
 	try
 	{
 	    kalaha = new Kalaha(2, 6, 0, IP, 41970);
@@ -27,6 +25,8 @@ public class SpillepladePanel extends javax.swing.JPanel
 	    JOptionPane.showMessageDialog(null,"Én eller flere af de indtastede IP addresser er ikke gyldig.");
 	    e.printStackTrace();
 	}
+	
+	initComponents();
     }
     
     public void paintComponent(Graphics g)
@@ -83,7 +83,8 @@ public class SpillepladePanel extends javax.swing.JPanel
     private void initComponents()
     {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -93,25 +94,31 @@ public class SpillepladePanel extends javax.swing.JPanel
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Spil Information...eller noget");
+        jLabel2.setText("Spiller 1:");
+        jLabel2.setText("Spiller 1: " + kalaha.getSpillerPoint(1) + " point");
+
+        jLabel3.setText("Spiller 2:");
+        jLabel3.setText("Spiller 2: " + kalaha.getSpillerPoint(2) + " point");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addContainerGap(607, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addContainerGap(256, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -132,6 +139,7 @@ public class SpillepladePanel extends javax.swing.JPanel
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
